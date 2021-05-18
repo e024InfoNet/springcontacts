@@ -2,6 +2,7 @@ package br.com.albertoferes.springcontacts.repositories;
 
 import br.com.albertoferes.springcontacts.domain.Contato;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +24,21 @@ public class ContatoRepository {
         );
     }
 
-    @GetMapping("/enzo")
-    public Contato getContato() {
-        return new Contato(3,"Enzo", "enzo@icloud.com","66666-9999");
+    @GetMapping("/contato/{id}")
+    public Contato findbyId(@PathVariable Integer id) {
+        List<Contato> contatos = getAll();
+        for(Contato contato : contatos) {
+            if (id.equals(contato.getId())) return contato;
+        }
+        return new Contato();
+    }
+
+    @GetMapping("/contato/{nome}")
+    public Contato findbyName(@PathVariable String nome) {
+        List<Contato> contatos = getAll();
+        for(Contato contato : contatos) {
+            if (nome.equals(contato.getNome())) return contato;
+        }
+        return new Contato();
     }
 }
