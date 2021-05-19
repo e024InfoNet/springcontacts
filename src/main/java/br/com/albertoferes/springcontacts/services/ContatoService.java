@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContatoService {
@@ -15,5 +16,10 @@ public class ContatoService {
 
     public List<Contato> buscarTodos() {
         return repository.findAll();
+    }
+
+    public Contato buscarPorId(Integer id) {
+        Optional<Contato> contatoOptional = repository.findById(id);
+        return contatoOptional.orElse(new Contato());
     }
 }

@@ -5,6 +5,7 @@ import br.com.albertoferes.springcontacts.services.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,11 @@ public class ContatoResource {
     public ResponseEntity<List<Contato>> buscarTodos() {
         List<Contato> contatos = service.buscarTodos();
         return ResponseEntity.ok().body(contatos);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Contato> buscarPorId(@PathVariable Integer id) {
+        Contato contato = service.buscarPorId(id);
+        return ResponseEntity.ok().body(contato);
     }
 }
