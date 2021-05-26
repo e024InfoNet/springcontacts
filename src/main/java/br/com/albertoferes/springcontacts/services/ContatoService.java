@@ -22,4 +22,14 @@ public class ContatoService {
         Optional<Contato> contatoOptional = repository.findById(id);
         return contatoOptional.orElse(new Contato());
     }
+
+    public Contato inserir(Contato contato) {
+        Contato contatoSaved = repository.save(contato);
+        contato.setId(contatoSaved.getId());
+        return contato;
+    }
+
+    public void remover(Integer id) {
+        repository.deleteById(id);
+    }
 }
