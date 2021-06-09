@@ -23,7 +23,7 @@ public class ContatoService {
         return contatoOptional.orElse(new Contato());
     }
 
-    public Contato inserir(Contato contato) {
+    public Contato salvar(Contato contato) {
         Contato contatoSaved = repository.save(contato);
         contato.setId(contatoSaved.getId());
         return contato;
@@ -31,5 +31,9 @@ public class ContatoService {
 
     public void remover(Integer id) {
         repository.deleteById(id);
+    }
+
+    public Contato atualizar(Contato contato) {
+        return repository.save(contato);
     }
 }

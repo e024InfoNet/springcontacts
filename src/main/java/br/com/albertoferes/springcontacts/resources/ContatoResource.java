@@ -31,7 +31,7 @@ public class ContatoResource {
 
     @PostMapping
     public ResponseEntity<Void> inserir (@RequestBody Contato contato) {
-        Contato contatoSaved = service.inserir(contato);
+        Contato contatoSaved = service.salvar(contato);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -40,9 +40,15 @@ public class ContatoResource {
         return ResponseEntity.created(uri).build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> remover(@PathVariable  Integer id) {
         service.remover(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> atulizar(@RequestBody Contato contato, @PathVariable  Integer id) {
+        Contato atualizado = service.atualizar(contato);
+        return ResponseEntity.noContent().build();
     }
 }
